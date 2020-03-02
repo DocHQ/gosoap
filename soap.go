@@ -12,7 +12,9 @@ import (
 	"sync"
 	"time"
 
+	"github.com/sirupsen/logrus"
 	"golang.org/x/net/html/charset"
+	"moul.io/http2curl"
 )
 
 // HeaderParams holds params specific to the header
@@ -192,6 +194,8 @@ func (p *process) doRequest(url string) ([]byte, error) {
 	req.Header.Add("Accept", "text/xml")
 	req.Header.Add("SOAPAction", p.SoapAction)
 
+	command, _ := http2curl.GetCurlCommand(req)
+	logrus.Debugf("Request as cURL: %+v", command)
 	resp, err := p.httpClient().Do(req)
 	if err != nil {
 		return nil, err
