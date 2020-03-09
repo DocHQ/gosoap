@@ -1,4 +1,4 @@
-module github.com/tiaguinho/gosoap
+module github.com/DocHQ/gosoap
 
 require (
 	github.com/sirupsen/logrus v1.4.2
